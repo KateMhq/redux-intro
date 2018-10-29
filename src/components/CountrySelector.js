@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 const countries = ['Belgium', 'France', 'Germany', 'Holland', 'Ireland', 'Italy', 'Luxemburg', 'Portugal', 'Spain'];
 
-function CountrySelector({ countryListOpen, selectedCountry, dispatch}){
+function CountrySelector({ countryListOpen, countriesVisited, selectedCountry, dispatch}){
 
   function selectCountry(country){
     dispatch({
@@ -31,12 +31,25 @@ function CountrySelector({ countryListOpen, selectedCountry, dispatch}){
     });
   }
 
+  function handleSubmit(event){
+    event.preventDefault();
+    if (selectedCountry){
+      dispatch({
+        type:'ADD_COUNTRY',
+        country:selectedCountry
+      })
+
+    } else {
+      alert("Please select a country")
+    }
+  }
+
   const listClasses = cx('country-input__list',  {
     'country-input__list--visible': countryListOpen
   });
 
   return (
-    <div className="country-input">
+    <form className="country-input">
       <input
         type="text"
         className="country-input__field"
@@ -51,7 +64,8 @@ function CountrySelector({ countryListOpen, selectedCountry, dispatch}){
           })}
         </ul>
       </div>
-    </div>
+      <button onClick={handleSubmit}>Submit</button>
+    </form>
   );
 }
 
