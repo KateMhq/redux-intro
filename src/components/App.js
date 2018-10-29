@@ -17,16 +17,18 @@ class App extends React.Component {
     store.subscribe( () => {
       this.updateFromStore();
     });
+    console.log("2. Subscribe to store updates")
   }
 
   updateFromStore(){
     const { store } = this.props;
 
     const reduxState = store.getState();
+    console.log(reduxState, "5. Get updated state from redux store")
 
     this.setState({
       selectedButton: reduxState.selectedButton
-    });
+    }, () => console.log( `6. New value of state is ${this.state.selectedButton}`));
   }
 
   render(){
