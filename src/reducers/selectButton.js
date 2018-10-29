@@ -8,8 +8,18 @@ function selectButton( state = {}, action ){
       case 'RESET_BUTTON':
       console.log(action.selectedButton, "4. updated redux state");
       return{
-        selectedButton:undefined
-      }
+        selectedButton:action.selectedButton
+      };
+      case 'SELECT_ALL_BUTTON':
+      console.log(action.selectedButton, "4.updated redux state");
+      return{
+        selectedButton: action.selectedButton
+      };
+      case 'UNSELECT_BUTTON':
+      console.log(action.selectedButton, "4. updated redux state");
+      return{
+        selectedButton:action.selectedButton
+      };
     default:
 
       return state;
