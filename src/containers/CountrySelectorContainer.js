@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CountrySelector from '../components/CountrySelector';
 
 class CountrySelectorContainer extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(props,context){
+    super(props,context);
 
-    const reduxState = this.props.store.getState();
+    const reduxState = this.context.store.getState();
 
     this.state = {
       selectedCountry: reduxState.country.selectedCountry,
@@ -18,14 +19,14 @@ class CountrySelectorContainer extends React.Component {
   }
 
   componentDidMount(){
-    const { store } = this.props;
+    const { store } = this.context;
     store.subscribe( () => {
       this.updateFromStore();
     });
   }
 
   updateFromStore(){
-    const { store } = this.props;
+    const { store } = this.context;
 
     const reduxState = store.getState();
 
@@ -36,26 +37,26 @@ class CountrySelectorContainer extends React.Component {
   }
 
   selectCountry(country){
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: 'SET_SELECTED_COUNTRY',
       selectedCountry: country
     });
 
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: 'SET_COUNTRY_LIST_OPEN',
       countryListOpen: false
     });
   }
 
   handleFocus(event){
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: 'SET_COUNTRY_LIST_OPEN',
       countryListOpen: true
     });
   }
 
   handleBlur(event){
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: 'SET_COUNTRY_LIST_OPEN',
       countryListOpen: false
     });
@@ -72,6 +73,10 @@ class CountrySelectorContainer extends React.Component {
       />
     );
   }
+}
+
+CountrySelectorContainer.contextTypes ={
+  store: PropTypes.object
 }
 
 export default CountrySelectorContainer;
