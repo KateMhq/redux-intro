@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Welcome matches the snapshot 1`] = `
+<div>
+  <h1>
+    Welcome to basic movie search
+  </h1>
+  <p>
+    It is not pretty, but it works
+  </p>
+</div>
+`;
